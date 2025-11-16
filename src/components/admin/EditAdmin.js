@@ -21,7 +21,9 @@ const EditAdmin = () => {
 
   const fetchAdminData = async () => {
     try {
-      const response = await axios.get(`http://localhost:5000/admin/${id}`);
+      const response = await axios.get(
+        `${process.env.REACT_APP_API_URL}/admin/${id}`
+      );
       setAdminData({
         name: response.data.name,
         email: response.data.email,
@@ -41,7 +43,7 @@ const EditAdmin = () => {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`http://localhost:5000/admin/edit/${id}`, adminData);
+      await axios.put(`${process.env.REACT_APP_API_URL}/admin/edit/${id}`, adminData);
       displayMessage("Admin Details Update Successfully");
       navigate("/admin/view-admins"); // Redirect to admin list after update
     } catch (error) {

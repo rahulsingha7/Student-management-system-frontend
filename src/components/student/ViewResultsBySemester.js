@@ -17,7 +17,7 @@ const ViewResultsBySemester = () => {
     const fetchResults = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/student/grade/results-by-semester/${studentId}`
+          `${process.env.REACT_APP_API_URL}/student/grade/results-by-semester/${studentId}`
         );
 
         setStudentInfo(response.data.student);

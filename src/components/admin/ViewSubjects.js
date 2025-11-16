@@ -17,7 +17,7 @@ const ViewSubjects = () => {
     const fetchSessions = async () => {
       try {
         const sessionResponse = await axios.get(
-          "http://localhost:5000/admin/sessions"
+          `${process.env.REACT_APP_API_URL}/admin/sessions`
         );
         setSessions(sessionResponse.data);
       } catch (error) {
@@ -39,7 +39,7 @@ const ViewSubjects = () => {
     setLoading(true);
     try {
       const response = await axios.get(
-        `http://localhost:5000/admin/subjects?sessionId=${selectedSession}&search=${search}`
+        `${process.env.REACT_APP_API_URL}/admin/subjects?sessionId=${selectedSession}&search=${search}`
       );
       setSubjects(response.data);
       // displayMessage("Subjects loaded successfully.");
@@ -53,7 +53,7 @@ const ViewSubjects = () => {
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this subject?")) {
       try {
-        await axios.delete(`http://localhost:5000/admin/subjects/${id}`);
+        await axios.delete(`${process.env.REACT_APP_API_URL}/admin/subjects/${id}`);
         setSubjects(subjects.filter((subject) => subject._id !== id));
         displayMessage("Subject deleted successfully!");
       } catch (error) {

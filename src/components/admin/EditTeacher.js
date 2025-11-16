@@ -21,7 +21,7 @@ const EditTeacher = () => {
 
   const fetchTeacherData = async () => {
     try {
-      const response = await axios.get(`http://localhost:5000/teacher/${id}`);
+      const response = await axios.get(`${process.env.REACT_APP_API_URL}/teacher/${id}`);
       setTeacherData({
         name: response.data.name,
         teacherId: response.data.teacherId,
@@ -42,7 +42,7 @@ const EditTeacher = () => {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`http://localhost:5000/teacher/edit/${id}`, teacherData);
+      await axios.put(`${process.env.REACT_APP_API_URL}/teacher/edit/${id}`, teacherData);
       navigate("/admin/view-teachers"); // Redirect to teacher list after update
     } catch (error) {
       displayError("Failed to update teacher.");

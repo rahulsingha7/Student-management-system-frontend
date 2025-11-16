@@ -18,7 +18,7 @@ const ViewSections = () => {
     const fetchSessions = async () => {
       try {
         const sessionResponse = await axios.get(
-          "http://localhost:5000/admin/sessions"
+          `${process.env.REACT_APP_API_URL}/admin/sessions`
         );
         setSessions(sessionResponse.data);
       } catch (error) {
@@ -41,7 +41,7 @@ const ViewSections = () => {
     setLoading(true);
     try {
       const response = await axios.get(
-        `http://localhost:5000/admin/sections?sessionId=${selectedSession}&search=${search}`
+        `${process.env.REACT_APP_API_URL}/admin/sections?sessionId=${selectedSession}&search=${search}`
       );
       setSections(response.data);
       // displayMessage("Sections loaded successfully.");
@@ -68,7 +68,7 @@ const ViewSections = () => {
     }
 
     try {
-      await axios.delete(`http://localhost:5000/admin/sections/${id}`);
+      await axios.delete(`${process.env.REACT_APP_API_URL}/admin/sections/${id}`);
       setSections(sections.filter((section) => section._id !== id));
       displayMessage("Section deleted successfully!");
     } catch (error) {

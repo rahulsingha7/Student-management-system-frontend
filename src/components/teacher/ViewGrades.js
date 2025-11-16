@@ -18,7 +18,7 @@ const ViewGrades = () => {
     const fetchGrades = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5000/teacher/results/view-grades",
+          `${process.env.REACT_APP_API_URL}/teacher/results/view-grades`,
           { params: { teacherId, studentId, subjectId: state.subjectId } } // Include subjectId here
         );
         setGrades(response.data);
@@ -28,10 +28,9 @@ const ViewGrades = () => {
         setLoading(false);
       }
     };
-  
+
     fetchGrades();
   }, [teacherId, studentId, state.subjectId]);
-  
 
   const handleDelete = async (resultId) => {
     const confirmDelete = window.confirm(
@@ -40,9 +39,12 @@ const ViewGrades = () => {
     if (!confirmDelete) return;
 
     try {
-      await axios.delete(`http://localhost:5000/teacher/results/delete-grade`, {
-        data: { resultId },
-      });
+      await axios.delete(
+        `${process.env.REACT_APP_API_URL}/teacher/results/delete-grade`,
+        {
+          data: { resultId },
+        }
+      );
       // Update the grades array after deleting
       setGrades((prevGrades) =>
         prevGrades.filter((grade) => grade.resultId !== resultId)
@@ -57,7 +59,6 @@ const ViewGrades = () => {
   if (loading) {
     return <div>Loading Grades...</div>;
   }
-
 
   if (grades.length === 0) {
     return (

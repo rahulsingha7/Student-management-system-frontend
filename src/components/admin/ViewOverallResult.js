@@ -15,7 +15,7 @@ const ViewOverallResult = () => {
     const fetchResults = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5000/admin/results/overall-results"
+          `${process.env.REACT_APP_API_URL}/admin/results/overall-results`
         );
         setStudents(response.data);
         setFilteredStudents(response.data);

@@ -18,7 +18,7 @@ const EditSubject = () => {
     const fetchSubject = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/admin/subjects/${id}`
+          `${process.env.REACT_APP_API_URL}/admin/subjects/${id}`
         );
         const { courseCode, courseTitle, semester, session } = response.data;
         setCourseCode(courseCode);
@@ -33,10 +33,10 @@ const EditSubject = () => {
     const fetchSessionsSemesters = async () => {
       try {
         const sessionResponse = await axios.get(
-          "http://localhost:5000/admin/sessions"
+          `${process.env.REACT_APP_API_URL}/admin/sessions`
         );
         const semesterResponse = await axios.get(
-          "http://localhost:5000/admin/semesters"
+          `${process.env.REACT_APP_API_URL}/admin/semesters`
         );
         setSessions(sessionResponse.data);
         setSemesters(semesterResponse.data);
@@ -52,7 +52,7 @@ const EditSubject = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`http://localhost:5000/admin/subjects/${id}`, {
+      await axios.put(`${process.env.REACT_APP_API_URL}/admin/subjects/${id}`, {
         courseCode,
         courseTitle,
         semesterId,

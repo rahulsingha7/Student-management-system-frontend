@@ -18,7 +18,7 @@ const AdminViewResults = () => {
       setLoading(true);
       try {
         const response = await axios.get(
-          "http://localhost:5000/admin/sessions"
+          `${process.env.REACT_APP_API_URL}/admin/sessions`
         );
         setSessions(response.data);
       } catch (error) {
@@ -36,7 +36,7 @@ const AdminViewResults = () => {
     setFilteredResults([]);
     try {
       const response = await axios.get(
-        "http://localhost:5000/admin/results/student",
+        `${process.env.REACT_APP_API_URL}/admin/results/student`,
         {
           params: { sessionId }, // Check if this is passing the correct session ID
         }

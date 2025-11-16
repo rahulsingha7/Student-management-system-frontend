@@ -20,7 +20,7 @@ const EditStudent = () => {
 
   const fetchStudentData = async () => {
     try {
-      const response = await axios.get(`http://localhost:5000/student/${id}`);
+      const response = await axios.get(`${process.env.REACT_APP_API_URL}/student/${id}`);
       setStudentData({
         name: response.data.name,
         studentId: response.data.studentId,
@@ -41,7 +41,7 @@ const EditStudent = () => {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`http://localhost:5000/student/edit/${id}`, studentData);
+      await axios.put(`${process.env.REACT_APP_API_URL}/student/edit/${id}`, studentData);
       displayMessage("Studen Details Updated Successfully");
       navigate("/admin/view-students"); // Redirect to student list after update
     } catch (error) {

@@ -14,7 +14,7 @@ const EditSemester = () => {
     const fetchSemester = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/admin/semesters/${id}`
+          `${process.env.REACT_APP_API_URL}/admin/semesters/${id}`
         );
         setSemester(response.data.semester);
       } catch (error) {
@@ -27,7 +27,7 @@ const EditSemester = () => {
   const handleUpdate = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`http://localhost:5000/admin/semesters/${id}`, {
+      await axios.put(`${process.env.REACT_APP_API_URL}/admin/semesters/${id}`, {
         semester,
       });
       navigate("/admin/view-semester"); // Redirect to View Semesters

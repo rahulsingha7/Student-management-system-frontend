@@ -14,7 +14,7 @@ const EditSession = () => {
     const fetchSession = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/admin/sessions/${id}`
+          `${process.env.REACT_APP_API_URL}/admin/sessions/${id}`
         );
         setSessionName(response.data.name);
       } catch (error) {
@@ -27,7 +27,7 @@ const EditSession = () => {
   const handleUpdate = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`http://localhost:5000/admin/sessions/${id}`, {
+      await axios.put(`${process.env.REACT_APP_API_URL}/admin/sessions/${id}`, {
         name: sessionName,
       });
       navigate("/admin/view-sessions"); // Redirect to the sessions page after updating

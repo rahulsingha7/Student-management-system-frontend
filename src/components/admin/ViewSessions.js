@@ -18,7 +18,7 @@ const ViewSessions = () => {
   const fetchSessions = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/admin/sessions?search=${search}`
+        `${process.env.REACT_APP_API_URL}/admin/sessions?search=${search}`
       );
       setSessions(response.data);
       setLoading(false);
@@ -35,7 +35,7 @@ const ViewSessions = () => {
     if (!isConfirmed) return; // If the user cancels, stop here.
 
     try {
-      await axios.delete(`http://localhost:5000/admin/sessions/${id}`);
+      await axios.delete(`${process.env.REACT_APP_API_URL}/admin/sessions/${id}`);
       setSessions(sessions.filter((session) => session._id !== id)); // Update local state after deletion
     } catch (error) {
       displayError(error.message || "An error occurred while deleting the session.");

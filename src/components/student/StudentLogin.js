@@ -11,10 +11,13 @@ const StudentLogin = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:5000/student/login", {
-        studentId,
-        password,
-      });
+      const response = await axios.post(
+        `${process.env.REACT_APP_API_URL}/student/login`,
+        {
+          studentId,
+          password,
+        }
+      );
       // Store both token and role in localStorage
       localStorage.setItem("token", response.data.token);
       localStorage.setItem("username", response.data.user.name);

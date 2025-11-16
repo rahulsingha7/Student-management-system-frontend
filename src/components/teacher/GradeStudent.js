@@ -35,19 +35,22 @@ const GradeStudent = () => {
     e.preventDefault();
     try {
       const teacherId = localStorage.getItem("userId");
-      await axios.post("http://localhost:5000/teacher/results/grade-student", {
-        teacherId,
-        studentId,
-        subjectId,
-        semesterId,
-        sectionId,
-        sessionId,
-        attendance,
-        assignment,
-        ctMarks,
-        midTerm,
-        finalExam,
-      });
+      await axios.post(
+        `${process.env.REACT_APP_API_URL}/teacher/results/grade-student`,
+        {
+          teacherId,
+          studentId,
+          subjectId,
+          semesterId,
+          sectionId,
+          sessionId,
+          attendance,
+          assignment,
+          ctMarks,
+          midTerm,
+          finalExam,
+        }
+      );
       displayMessage("Grade submitted successfully.");
       setError("");
       navigate(-1); // Go back to the previous page

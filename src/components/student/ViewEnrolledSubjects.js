@@ -17,7 +17,7 @@ const ViewEnrolledSubjects = () => {
       try {
         // Fetch sessions
         const sessionResponse = await axios.get(
-          "http://localhost:5000/admin/sessions"
+          `${process.env.REACT_APP_API_URL}/admin/sessions`
         );
         setSessions(sessionResponse.data);
 
@@ -36,7 +36,7 @@ const ViewEnrolledSubjects = () => {
   const fetchEnrolledSubjects = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/student/enrollment/enrolled-subjects/${studentId}?sessionId=${selectedSession}`
+        `${process.env.REACT_APP_API_URL}/student/enrollment/enrolled-subjects/${studentId}?sessionId=${selectedSession}`
       );
       setEnrolledSubjects(response.data.subjects || []);
       setLoading(false);
@@ -61,7 +61,7 @@ const ViewEnrolledSubjects = () => {
 
     try {
       const response = await axios.delete(
-        "http://localhost:5000/student/enrollment/delete-subject",
+        `${process.env.REACT_APP_API_URL}/student/enrollment/delete-subject`,
         {
           data: { studentId, subjectId, sectionId },
         }

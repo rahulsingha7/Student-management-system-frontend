@@ -22,7 +22,7 @@ const GradeAssignment = () => {
     const fetchSubmissionDetails = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/teacher/assignments/submissions/${submissionId}`
+          `${process.env.REACT_APP_API_URL}/teacher/assignments/submissions/${submissionId}`
         );
         if (response.data) {
           setSubmissionData(response.data);
@@ -45,7 +45,7 @@ const GradeAssignment = () => {
       );
 
       await axios.put(
-        `http://localhost:5000/teacher/assignments/submissions/${submissionId}`,
+        `${process.env.REACT_APP_API_URL}/teacher/assignments/submissions/${submissionId}`,
         {
           marks: marks === "Not provided yet" ? "" : marks,
           feedback: feedback === "Not provided yet" ? "" : feedback,
@@ -57,7 +57,6 @@ const GradeAssignment = () => {
       displayError("Failed to update marks and feedback.");
     }
   };
- 
 
   const displayError = (errMsg) => {
     setError(errMsg);

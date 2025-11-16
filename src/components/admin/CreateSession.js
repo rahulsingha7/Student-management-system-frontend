@@ -11,7 +11,9 @@ const CreateSession = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:5000/admin/sessions", { name });
+      await axios.post(`${process.env.REACT_APP_API_URL}/admin/sessions`, {
+        name,
+      });
       displayMessage("Session created successfully!");
       navigate("/admin/view-sessions"); // Redirect to View Sessions
     } catch (error) {

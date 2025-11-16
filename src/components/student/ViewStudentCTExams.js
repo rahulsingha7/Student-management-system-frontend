@@ -16,11 +16,12 @@ const ViewStudentCTExams = () => {
     setTimeout(() => setError(""), 5000); // Clear after 2 seconds
   };
 
-
   useEffect(() => {
     const fetchSessions = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/admin/sessions");
+        const response = await axios.get(
+          `${process.env.REACT_APP_API_URL}/admin/sessions`
+        );
         setSessions(response.data);
       } catch (err) {
         displayError("Failed to fetch sessions.");
@@ -42,7 +43,7 @@ const ViewStudentCTExams = () => {
 
     try {
       const response = await axios.get(
-        `http://localhost:5000/student/exam/ct-exams?studentId=${studentId}&sessionId=${sessionId}`
+        `${process.env.REACT_APP_API_URL}/student/exam/ct-exams?studentId=${studentId}&sessionId=${sessionId}`
       );
       setCtExams(response.data.exams);
       // displayMessage("CT exams loaded successfully.");

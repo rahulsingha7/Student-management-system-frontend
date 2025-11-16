@@ -17,7 +17,7 @@ const ViewTeacherList = () => {
   const fetchTeachers = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/teacher/list?search=${search}`
+        `${process.env.REACT_APP_API_URL}/teacher/list?search=${search}`
       );
       setTeachers(response.data);
       setLoading(false);
@@ -32,7 +32,7 @@ const ViewTeacherList = () => {
       return;
 
     try {
-      await axios.delete(`http://localhost:5000/teacher/delete/${id}`);
+      await axios.delete(`${process.env.REACT_APP_API_URL}/teacher/delete/${id}`);
       fetchTeachers(); // Refresh list
     } catch (error) {
     displayError("Error deleting teacher:", error);

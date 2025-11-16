@@ -29,7 +29,7 @@ const EditAssignment = () => {
     const fetchAssignment = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/teacher/assignments/${id}`
+          `${process.env.REACT_APP_API_URL}/teacher/assignments/${id}`
         );
         const assignment = response.data;
         setFormData({
@@ -40,14 +40,16 @@ const EditAssignment = () => {
           session: assignment.session._id,
         });
       } catch (error) {
-        displayError("Error fetching assignment details. Please try again later.");
+        displayError(
+          "Error fetching assignment details. Please try again later."
+        );
       }
     };
 
     const fetchMySchedules = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5000/admin/teacher-schedule"
+          `${process.env.REACT_APP_API_URL}/admin/teacher-schedule`
         );
         const filteredSchedules = response.data.filter(
           (schedule) => schedule.teacherId._id === teacherId
@@ -168,7 +170,7 @@ const EditAssignment = () => {
     e.preventDefault();
     try {
       await axios.put(
-        `http://localhost:5000/teacher/assignments/${id}`,
+        `${process.env.REACT_APP_API_URL}/teacher/assignments/${id}`,
         formData
       );
       displayMessage("Assignment updated successfully!");

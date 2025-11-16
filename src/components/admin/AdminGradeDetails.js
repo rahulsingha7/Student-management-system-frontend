@@ -15,7 +15,7 @@ const AdminGradeDetails = () => {
     const fetchGradeDetails = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/admin/results/details/${studentId}/${sessionId}`
+          `${process.env.REACT_APP_API_URL}/admin/results/details/${studentId}/${sessionId}`
         );
 
         const { studentId1, studentName, session, gpa, grades } = response.data;
@@ -46,7 +46,7 @@ const AdminGradeDetails = () => {
     if (confirmDelete) {
       try {
         const response = await axios.delete(
-          `http://localhost:5000/admin/results/delete-grade/${gradeId}`
+          `${process.env.REACT_APP_API_URL}/admin/results/delete-grade/${gradeId}`
         );
 
         if (response.status === 200) {

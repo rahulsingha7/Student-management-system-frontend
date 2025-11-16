@@ -17,10 +17,10 @@ const CreateSection = () => {
     const fetchSemestersAndSessions = async () => {
       try {
         const semesterResponse = await axios.get(
-          "http://localhost:5000/admin/semesters"
+          `${process.env.REACT_APP_API_URL}/admin/semesters`
         );
         const sessionResponse = await axios.get(
-          "http://localhost:5000/admin/sessions"
+          `${process.env.REACT_APP_API_URL}/admin/sessions`
         );
 
         setSemesters(semesterResponse.data);
@@ -40,7 +40,7 @@ const CreateSection = () => {
     }
 
     try {
-      await axios.post("http://localhost:5000/admin/sections", {
+      await axios.post(`${process.env.REACT_APP_API_URL}/admin/sections`, {
         section,
         semesterId: selectedSemester,
         sessionId: selectedSession,

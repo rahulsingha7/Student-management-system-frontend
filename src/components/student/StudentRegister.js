@@ -23,7 +23,7 @@ const StudentRegister = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/student/register",
+        `${process.env.REACT_APP_API_URL}/student/register`,
         {
           name,
           studentId,

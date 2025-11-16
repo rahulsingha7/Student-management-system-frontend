@@ -24,7 +24,7 @@ const TeacherRegister = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/teacher/register",
+        `${process.env.REACT_APP_API_URL}/teacher/register`,
         {
           name,
           teacherId,
@@ -51,10 +51,10 @@ const TeacherRegister = () => {
   };
   return (
     <div className="container">
-           {message && <div className="alert alert-info">{message}</div>}
-           {error && <div className="alert alert-danger">{error}</div>}
+      {message && <div className="alert alert-info">{message}</div>}
+      {error && <div className="alert alert-danger">{error}</div>}
       <h2>Teacher Registration</h2>
- 
+
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <label className="form-label">Name</label>

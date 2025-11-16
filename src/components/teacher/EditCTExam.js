@@ -28,13 +28,15 @@ const EditCTExam = () => {
       try {
         // Fetch all teacher schedules
         const scheduleResponse = await axios.get(
-          `http://localhost:5000/admin/teacher-schedule?teacherId=${teacherId}`
+          `${process.env.REACT_APP_API_URL}/admin/teacher-schedule?teacherId=${teacherId}`
         );
         const schedule = scheduleResponse.data;
 
         // Extract unique sessions for initial dropdown
         const uniqueSessions = [
-          ...new Map(schedule.map((item) => [item.session._id, item.session])).values(),
+          ...new Map(
+            schedule.map((item) => [item.session._id, item.session])
+          ).values(),
         ];
 
         setAllData(schedule);
@@ -42,7 +44,7 @@ const EditCTExam = () => {
 
         // Fetch existing CT exam details
         const ctExamResponse = await axios.get(
-          `http://localhost:5000/teacher/ct-exams/${id}`
+          `${process.env.REACT_APP_API_URL}/teacher/ct-exams/${id}`
         );
         const ctExam = ctExamResponse.data;
 
@@ -68,11 +70,15 @@ const EditCTExam = () => {
   }, [id, teacherId]);
 
   const filterSemesters = (selectedSession) => {
-    const filtered = allData.filter((item) => item.session._id === selectedSession);
+    const filtered = allData.filter(
+      (item) => item.session._id === selectedSession
+    );
 
     // Remove duplicates
     const uniqueSemesters = [
-      ...new Map(filtered.map((item) => [item.semester._id, item.semester])).values(),
+      ...new Map(
+        filtered.map((item) => [item.semester._id, item.semester])
+      ).values(),
     ];
 
     setFilteredSemesters(uniqueSemesters);
@@ -80,12 +86,15 @@ const EditCTExam = () => {
 
   const filterSubjects = (selectedSemester) => {
     const filtered = allData.filter(
-      (item) => item.semester._id === selectedSemester && item.session._id === session
+      (item) =>
+        item.semester._id === selectedSemester && item.session._id === session
     );
 
     // Remove duplicates
     const uniqueSubjects = [
-      ...new Map(filtered.map((item) => [item.subject._id, item.subject])).values(),
+      ...new Map(
+        filtered.map((item) => [item.subject._id, item.subject])
+      ).values(),
     ];
 
     setFilteredSubjects(uniqueSubjects);
@@ -93,12 +102,15 @@ const EditCTExam = () => {
 
   const filterSections = (selectedSemester) => {
     const filtered = allData.filter(
-      (item) => item.semester._id === selectedSemester && item.session._id === session
+      (item) =>
+        item.semester._id === selectedSemester && item.session._id === session
     );
 
     // Remove duplicates
     const uniqueSections = [
-      ...new Map(filtered.map((item) => [item.section._id, item.section])).values(),
+      ...new Map(
+        filtered.map((item) => [item.section._id, item.section])
+      ).values(),
     ];
 
     setFilteredSections(uniqueSections);
@@ -144,15 +156,18 @@ const EditCTExam = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`http://localhost:5000/teacher/ct-exams/${id}`, {
-        ctName,
-        examDate,
-        duration,
-        subject,
-        semester,
-        session,
-        section,
-      });
+      await axios.put(
+        `${process.env.REACT_APP_API_URL}/teacher/ct-exams/${id}`,
+        {
+          ctName,
+          examDate,
+          duration,
+          subject,
+          semester,
+          session,
+          section,
+        }
+      );
       displayMessage("CT Exam updated successfully!");
       navigate("/teacher/view-ct-exams");
     } catch (error) {

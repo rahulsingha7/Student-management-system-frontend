@@ -21,7 +21,7 @@ const AdminEditGrade = () => {
     const fetchGrade = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/admin/results/edit-grade/${gradeId}`
+          `${process.env.REACT_APP_API_URL}/admin/results/edit-grade/${gradeId}`
         );
 
         const {
@@ -53,14 +53,17 @@ const AdminEditGrade = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:5000/admin/results/update-grade", {
-        gradeId, // Use gradeId for updating
-        attendance,
-        assignment,
-        ctMarks,
-        midTerm,
-        finalExam,
-      });
+      await axios.post(
+        "${process.env.REACT_APP_API_URL}/admin/results/update-grade",
+        {
+          gradeId, // Use gradeId for updating
+          attendance,
+          assignment,
+          ctMarks,
+          midTerm,
+          finalExam,
+        }
+      );
 
       displayMessage("Grade updated successfully.");
       // setError("");

@@ -15,7 +15,7 @@ const ViewStudentSchedule = () => {
     const fetchSessions = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5000/admin/sessions"
+          `${process.env.REACT_APP_API_URL}/admin/sessions`
         );
         setSessions(response.data);
       } catch (err) {
@@ -37,7 +37,7 @@ const ViewStudentSchedule = () => {
 
     try {
       const response = await axios.get(
-        `http://localhost:5000/student/schedule/class-schedule/${studentId}?sessionId=${sessionId}`
+        `${process.env.REACT_APP_API_URL}/student/schedule/class-schedule/${studentId}?sessionId=${sessionId}`
       );
       setStudentSchedule(response.data.schedule);
     } catch (err) {

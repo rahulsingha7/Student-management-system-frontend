@@ -17,7 +17,7 @@ const ViewMarks = () => {
     const fetchGradeDetails = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/student/grade/details/${gradeId}`
+          `${process.env.REACT_APP_API_URL}/student/grade/details/${gradeId}`
         );
         setGradeDetails(response.data);
       } catch (err) {
@@ -44,7 +44,7 @@ const ViewMarks = () => {
       {gradeDetails && (
         <>
           <p>Student ID: {gradeDetails.studentId.studentId}</p>
-           <p>Student Name: {gradeDetails.studentId.name}</p>
+          <p>Student Name: {gradeDetails.studentId.name}</p>
           <p>Session: {gradeDetails.session.name}</p>
 
           <h3>Course Details</h3>

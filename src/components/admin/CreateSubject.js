@@ -17,10 +17,10 @@ const CreateSubject = () => {
     const fetchData = async () => {
       try {
         const sessionResponse = await axios.get(
-          "http://localhost:5000/admin/sessions"
+          `${process.env.REACT_APP_API_URL}/admin/sessions`
         );
         const semesterResponse = await axios.get(
-          "http://localhost:5000/admin/semesters"
+          `${process.env.REACT_APP_API_URL}/admin/semesters`
         );
         setSessions(sessionResponse.data);
         setSemesters(semesterResponse.data);
@@ -34,7 +34,7 @@ const CreateSubject = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:5000/admin/subjects", {
+      await axios.post(`${process.env.REACT_APP_API_URL}/admin/subjects`, {
         courseCode,
         courseTitle,
         semesterId,

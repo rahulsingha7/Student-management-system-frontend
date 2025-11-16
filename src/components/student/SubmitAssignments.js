@@ -25,7 +25,9 @@ const SubmitAssignments = () => {
   useEffect(() => {
     const fetchSessions = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/admin/sessions");
+        const response = await axios.get(
+          `${process.env.REACT_APP_API_URL}/admin/sessions`
+        );
         setSessions(response.data);
       } catch (error) {
         displayError("Error fetching sessions.");
@@ -47,7 +49,7 @@ const SubmitAssignments = () => {
       try {
         const studentId = localStorage.getItem("userId");
         const response = await axios.get(
-          `http://localhost:5000/student/assignments?studentId=${studentId}&sessionId=${selectedSession}`
+          `${process.env.REACT_APP_API_URL}/student/assignments?studentId=${studentId}&sessionId=${selectedSession}`
         );
         setAssignments(response.data.assignments);
       } catch (error) {
@@ -77,7 +79,7 @@ const SubmitAssignments = () => {
 
     try {
       await axios.post(
-        "http://localhost:5000/student/assignments/submit",
+        `${process.env.REACT_APP_API_URL}/student/assignments/submit`,
         formData,
         {
           headers: {
@@ -88,7 +90,9 @@ const SubmitAssignments = () => {
       displayMessage("Assignment submitted successfully!");
       navigate(`/student/view-submitted/${assignmentId}`);
     } catch (error) {
-      displayError(error.response?.data?.message || "Error submitting assignment.");
+      displayError(
+        error.response?.data?.message || "Error submitting assignment."
+      );
     }
   };
 

@@ -18,7 +18,9 @@ const ViewStudentAttendance = () => {
 
   const fetchSessions = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/admin/sessions");
+      const response = await axios.get(
+        `${process.env.REACT_APP_API_URL}/admin/sessions`
+      );
       setSessions(response.data);
     } catch (err) {
       displayError("Error fetching sessions.");
@@ -28,9 +30,12 @@ const ViewStudentAttendance = () => {
   const fetchAttendanceRecords = async (sessionId, query = "") => {
     setLoading(true);
     try {
-      const response = await axios.get("http://localhost:5000/student/attendance", {
-        params: { studentId, sessionId, search: query }
-      });
+      const response = await axios.get(
+        `${process.env.REACT_APP_API_URL}/student/attendance`,
+        {
+          params: { studentId, sessionId, search: query },
+        }
+      );
       setGroupedAttendance(response.data);
       setError(""); // Clear any previous errors
     } catch (error) {

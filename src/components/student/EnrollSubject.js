@@ -18,7 +18,7 @@ const EnrollSubject = () => {
     const fetchSessions = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5000/admin/sessions"
+          `${process.env.REACT_APP_API_URL}/admin/sessions`
         );
         setSessions(response.data);
       } catch (error) {
@@ -29,7 +29,7 @@ const EnrollSubject = () => {
     const fetchSubjects = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5000/student/enrollment/available-subjects"
+          `${process.env.REACT_APP_API_URL}/student/enrollment/available-subjects`
         );
         setSubjects(response.data);
       } catch (error) {
@@ -81,7 +81,7 @@ const EnrollSubject = () => {
     }
     try {
       const response = await axios.post(
-        "http://localhost:5000/student/enrollment/enroll",
+        `${process.env.REACT_APP_API_URL}/student/enrollment/enroll`,
         {
           studentId,
           selectedSubjects,

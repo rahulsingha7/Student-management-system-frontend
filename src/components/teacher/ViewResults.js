@@ -16,7 +16,9 @@ const ViewResults = () => {
 
   const fetchSessions = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/admin/sessions");
+      const response = await axios.get(
+        `${process.env.REACT_APP_API_URL}/admin/sessions`
+      );
       setSessions(response.data);
     } catch (error) {
       setError("Failed to fetch sessions.");
@@ -26,7 +28,7 @@ const ViewResults = () => {
   const fetchResults = async (sessionId) => {
     try {
       const response = await axios.get(
-        "http://localhost:5000/teacher/results",
+        `${process.env.REACT_APP_API_URL}/teacher/results`,
         { params: { teacherId, sessionId } }
       );
 

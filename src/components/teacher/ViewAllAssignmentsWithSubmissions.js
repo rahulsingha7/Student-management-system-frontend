@@ -25,7 +25,7 @@ const ViewAllAssignmentsWithSubmission = () => {
     const fetchSessions = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5000/admin/sessions"
+          `${process.env.REACT_APP_API_URL}/admin/sessions`
         );
         setSessions(response.data);
       } catch (err) {
@@ -49,7 +49,7 @@ const ViewAllAssignmentsWithSubmission = () => {
     try {
       const teacherId = localStorage.getItem("userId"); // Retrieve teacherId from local storage
       const response = await axios.get(
-        `http://localhost:5000/teacher/assignments/submissions?teacherId=${teacherId}&sessionId=${selectedSessionId}`
+        `${process.env.REACT_APP_API_URL}/teacher/assignments/submissions?teacherId=${teacherId}&sessionId=${selectedSessionId}`
       );
       if (response.data.assignments.length === 0) {
         displayError(
@@ -67,7 +67,7 @@ const ViewAllAssignmentsWithSubmission = () => {
 
   const handleDownload = (file) => {
     if (file) {
-      window.open(`http://localhost:5000/${file}`, "_blank");
+      window.open(`${process.env.REACT_APP_API_URL}/${file}`, "_blank");
     } else {
       displayError("No file submitted.");
     }
@@ -77,7 +77,7 @@ const ViewAllAssignmentsWithSubmission = () => {
     if (window.confirm("Are you sure you want to delete this submission?")) {
       try {
         await axios.delete(
-          `http://localhost:5000/student/assignments/delete/${submissionId}`
+          `${process.env.REACT_APP_API_URL}/student/assignments/delete/${submissionId}`
         );
         displayMessage("Submission deleted successfully.");
         // Optionally update state after deletion

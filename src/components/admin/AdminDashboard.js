@@ -10,7 +10,7 @@ const AdminDashboard = () => {
     const fetchStatistics = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5000/admin/statistics"
+          `${process.env.REACT_APP_API_URL}/statistics`
         );
         setStatistics(response.data);
       } catch (error) {

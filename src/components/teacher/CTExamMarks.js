@@ -16,7 +16,9 @@ const CTExamMarks = () => {
 
   const fetchSessions = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/admin/sessions");
+      const response = await axios.get(
+        `${process.env.REACT_APP_API_URL}/admin/sessions`
+      );
       setSessions(response.data);
     } catch (err) {
       displayError("Error fetching sessions.");
@@ -26,7 +28,7 @@ const CTExamMarks = () => {
   const fetchCTExamsWithMarks = async (sessionId) => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/teacher/ct-exams/with-marks?teacherId=${teacherId}&sessionId=${sessionId}`
+        `${process.env.REACT_APP_API_URL}/teacher/ct-exams/with-marks?teacherId=${teacherId}&sessionId=${sessionId}`
       );
       setCTExams(response.data);
     } catch (err) {
@@ -41,7 +43,7 @@ const CTExamMarks = () => {
     }
 
     axios
-      .post("http://localhost:5000/teacher/ct-exams/marks", {
+      .post(`${process.env.REACT_APP_API_URL}/teacher/ct-exams/marks`, {
         ctExamId,
         studentId,
         marks,
@@ -55,7 +57,10 @@ const CTExamMarks = () => {
 
   const handleUpdateMarks = (markId, marks) => {
     axios
-      .put(`http://localhost:5000/teacher/ct-exams/marks/${markId}`, { marks })
+      .put(
+        `${process.env.REACT_APP_API_URL}/teacher/ct-exams/marks/${markId}`,
+        { marks }
+      )
       .then(() => {
         displayMessage("Marks updated successfully!");
         fetchCTExamsWithMarks(selectedSession);
@@ -69,7 +74,9 @@ const CTExamMarks = () => {
     }
 
     axios
-      .delete(`http://localhost:5000/teacher/ct-exams/marks/${markId}`)
+      .delete(
+        `${process.env.REACT_APP_API_URL}/teacher/ct-exams/marks/${markId}`
+      )
       .then(() => {
         displayMessage("Marks deleted successfully!");
         fetchCTExamsWithMarks(selectedSession);

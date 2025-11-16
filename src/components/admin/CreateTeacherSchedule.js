@@ -25,9 +25,9 @@ const CreateTeacherSchedule = () => {
     const fetchData = async () => {
       try {
         const [teacherRes, semesterRes, sessionRes] = await Promise.all([
-          axios.get("http://localhost:5000/teacher/list"),
-          axios.get("http://localhost:5000/admin/semesters"),
-          axios.get("http://localhost:5000/admin/sessions"),
+          axios.get(`${process.env.REACT_APP_API_URL}/teacher/list`),
+          axios.get(`${process.env.REACT_APP_API_URL}/admin/semesters`),
+          axios.get(`${process.env.REACT_APP_API_URL}/admin/sessions`),
         ]);
         setTeachers(teacherRes.data);
         setSemesters(semesterRes.data);
@@ -44,7 +44,7 @@ const CreateTeacherSchedule = () => {
       // Fetch subjects based on selected session
       axios
         .get(
-          `http://localhost:5000/admin/teacher-schedule/subjects/session/${session}`
+          `${process.env.REACT_APP_API_URL}/admin/teacher-schedule/subjects/session/${session}`
         )
         .then((response) => setSubjects(response.data))
         .catch((error) => setError("Failed to fetch subjects"));
@@ -56,7 +56,7 @@ const CreateTeacherSchedule = () => {
       // Fetch sections based on selected semester and session
       axios
         .get(
-          `http://localhost:5000/admin/teacher-schedule/sections/semester/${semester}/session/${session}`
+          `${process.env.REACT_APP_API_URL}/admin/teacher-schedule/sections/semester/${semester}/session/${session}`
         )
         .then((response) => setSections(response.data))
         .catch((error) => setError("Failed to fetch sections"));
@@ -66,16 +66,19 @@ const CreateTeacherSchedule = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:5000/admin/teacher-schedule", {
-        teacherId,
-        subject,
-        semester,
-        session,
-        section,
-        day,
-        startTime,
-        endTime,
-      });
+      await axios.post(
+        `${process.env.REACT_APP_API_URL}/admin/teacher-schedule`,
+        {
+          teacherId,
+          subject,
+          semester,
+          session,
+          section,
+          day,
+          startTime,
+          endTime,
+        }
+      );
       displayMessage("Teacher Schedule created successfully!");
       navigate("/admin/view-teacher-schedules");
     } catch (error) {

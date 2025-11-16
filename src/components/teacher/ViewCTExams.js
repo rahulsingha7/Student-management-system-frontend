@@ -23,7 +23,9 @@ const ViewCTExams = () => {
   useEffect(() => {
     const fetchSessions = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/admin/sessions");
+        const response = await axios.get(
+          `${process.env.REACT_APP_API_URL}/admin/sessions`
+        );
         setSessions(response.data);
       } catch (err) {
         displayError("Error fetching sessions.");
@@ -46,7 +48,7 @@ const ViewCTExams = () => {
     try {
       const teacherId = localStorage.getItem("userId");
       const response = await axios.get(
-        `http://localhost:5000/teacher/ct-exams?teacherId=${teacherId}&sessionId=${selectedSessionId}`
+        `${process.env.REACT_APP_API_URL}/teacher/ct-exams?teacherId=${teacherId}&sessionId=${selectedSessionId}`
       );
       setCtExams(response.data);
     } catch (err) {
@@ -59,7 +61,9 @@ const ViewCTExams = () => {
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this CT Exam?")) {
       try {
-        await axios.delete(`http://localhost:5000/teacher/ct-exams/${id}`);
+        await axios.delete(
+          `${process.env.REACT_APP_API_URL}/teacher/ct-exams/${id}`
+        );
         displayMessage("CT Exam deleted successfully!");
         setCtExams((prev) => prev.filter((exam) => exam._id !== id));
       } catch (err) {

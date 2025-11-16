@@ -27,7 +27,7 @@ const CreateCTExam = () => {
     const fetchMySchedules = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5000/admin/teacher-schedule"
+          `${process.env.REACT_APP_API_URL}/admin/teacher-schedule`
         );
         const filteredSchedules = response.data.filter(
           (schedule) => schedule.teacherId._id.toString() === teacherId
@@ -127,7 +127,7 @@ const CreateCTExam = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:5000/teacher/ct-exams", {
+      await axios.post(`${process.env.REACT_APP_API_URL}/teacher/ct-exams`, {
         ...formData,
         teacherId,
       });

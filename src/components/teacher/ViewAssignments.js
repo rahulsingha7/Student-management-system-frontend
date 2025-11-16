@@ -22,7 +22,7 @@ const ViewAssignments = () => {
     const fetchSessions = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5000/admin/sessions"
+          `${process.env.REACT_APP_API_URL}/admin/sessions`
         );
         setSessions(response.data);
       } catch (err) {
@@ -46,7 +46,7 @@ const ViewAssignments = () => {
     try {
       const teacherId = localStorage.getItem("userId"); // Retrieve teacherId from local storage
       const response = await axios.get(
-        `http://localhost:5000/teacher/assignments?teacherId=${teacherId}&sessionId=${selectedSessionId}`
+        `${process.env.REACT_APP_API_URL}/teacher/assignments?teacherId=${teacherId}&sessionId=${selectedSessionId}`
       );
       setAssignments(response.data);
     } catch (err) {
@@ -59,7 +59,9 @@ const ViewAssignments = () => {
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this assignment?")) {
       try {
-        await axios.delete(`http://localhost:5000/teacher/assignments/${id}`);
+        await axios.delete(
+          `${process.env.REACT_APP_API_URL}/teacher/assignments/${id}`
+        );
         displayMessage("Assignment deleted successfully!");
         // Refresh the assignment list
         setAssignments((prev) =>

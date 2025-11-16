@@ -17,7 +17,7 @@ const ViewStudentList = () => {
   const fetchStudents = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/student/list?search=${search}`
+        `${process.env.REACT_APP_API_URL}/student/list?search=${search}`
       );
       setStudents(response.data);
       setLoading(false);
@@ -32,7 +32,7 @@ const ViewStudentList = () => {
       return;
 
     try {
-      await axios.delete(`http://localhost:5000/student/delete/${id}`);
+      await axios.delete(`${process.env.REACT_APP_API_URL}/student/delete/${id}`);
       fetchStudents(); // Refresh list
     } catch (error) {
       displayError("Error deleting student:", error);

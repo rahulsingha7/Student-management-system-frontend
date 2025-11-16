@@ -11,10 +11,13 @@ const TeacherLogin = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:5000/teacher/login", {
-        email,
-        password,
-      });
+      const response = await axios.post(
+        `${process.env.REACT_APP_API_URL}/teacher/login`,
+        {
+          email,
+          password,
+        }
+      );
       localStorage.setItem("token", response.data.token);
       localStorage.setItem("username", response.data.teacher.name);
       localStorage.setItem("userId", response.data.teacher._id);

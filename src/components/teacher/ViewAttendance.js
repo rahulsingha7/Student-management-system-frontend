@@ -25,7 +25,9 @@ const ViewAttendance = () => {
 
   const fetchSessions = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/admin/sessions");
+      const response = await axios.get(
+        `${process.env.REACT_APP_API_URL}/admin/sessions`
+      );
       setSessions(response.data);
     } catch (err) {
       displayError("Error fetching sessions.");
@@ -38,7 +40,7 @@ const ViewAttendance = () => {
     try {
       setLoading(true);
       const response = await axios.get(
-        "http://localhost:5000/teacher/attendance/view",
+        `${process.env.REACT_APP_API_URL}/teacher/attendance/view`,
         { params: { teacherId, sessionId } }
       );
 
@@ -80,7 +82,7 @@ const ViewAttendance = () => {
   const updateAttendance = async (attendanceId, studentRecordId, newStatus) => {
     try {
       await axios.put(
-        `http://localhost:5000/teacher/attendance/update/${attendanceId}`,
+        `${process.env.REACT_APP_API_URL}/teacher/attendance/update/${attendanceId}`,
         {
           studentRecordId,
           status: newStatus,

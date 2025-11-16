@@ -21,7 +21,7 @@ const ViewSubmittedAssignments = () => {
     const fetchSessions = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5000/admin/sessions"
+          `${process.env.REACT_APP_API_URL}/admin/sessions`
         );
         setSessions(response.data);
       } catch (err) {
@@ -43,7 +43,7 @@ const ViewSubmittedAssignments = () => {
     try {
       const studentId = localStorage.getItem("userId");
       const response = await axios.get(
-        `http://localhost:5000/student/assignments/submitted/${studentId}?sessionId=${sessionId}`
+        `${process.env.REACT_APP_API_URL}/student/assignments/submitted/${studentId}?sessionId=${sessionId}`
       );
       setSubmittedAssignments(response.data.submissions);
     } catch (err) {
@@ -61,7 +61,7 @@ const ViewSubmittedAssignments = () => {
 
     try {
       await axios.delete(
-        `http://localhost:5000/student/assignments/delete/${submissionId}`
+        `${process.env.REACT_APP_API_URL}/student/assignments/delete/${submissionId}`
       );
       setSubmittedAssignments((prev) =>
         prev.filter((submission) => submission._id !== submissionId)
@@ -120,7 +120,7 @@ const ViewSubmittedAssignments = () => {
                 <td>{submission.feedback || "No feedback yet"}</td>
                 <td>
                   <a
-                    href={`http://localhost:5000/${submission.file}`}
+                    href={`${process.env.REACT_APP_API_URL}/${submission.file}`}
                     download={submission.assignment.title}
                     className="btn btn-secondary me-2"
                   >

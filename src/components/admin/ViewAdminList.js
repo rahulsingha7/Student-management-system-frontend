@@ -17,7 +17,7 @@ const ViewAdminList = () => {
   const fetchAdmins = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/admin/list?search=${search}`
+        `${process.env.REACT_APP_API_URL}/admin/list?search=${search}`
       );
       setAdmins(response.data);
       setLoading(false);
@@ -31,7 +31,7 @@ const ViewAdminList = () => {
     if (!window.confirm("Are you sure you want to delete this admin?")) return;
 
     try {
-      await axios.delete(`http://localhost:5000/admin/delete/${id}`);
+      await axios.delete(`${process.env.REACT_APP_API_URL}/admin/delete/${id}`);
       fetchAdmins(); // Refresh list
     } catch (error) {
       displayError("Error deleting admin:", error);

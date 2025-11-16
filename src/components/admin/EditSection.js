@@ -17,7 +17,7 @@ const EditSection = () => {
     const fetchSection = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/admin/sections/${id}`
+          `${process.env.REACT_APP_API_URL}/admin/sections/${id}`
         );
         const { section, session, semester } = response.data;
         setSection(section);
@@ -32,7 +32,7 @@ const EditSection = () => {
     const fetchSessions = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5000/admin/sessions/"
+          `${process.env.REACT_APP_API_URL}/admin/sessions/`
         );
         setSessions(response.data);
       } catch (error) {
@@ -44,7 +44,7 @@ const EditSection = () => {
     const fetchSemesters = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5000/admin/semesters"
+          `${process.env.REACT_APP_API_URL}/admin/semesters`
         );
         setSemesters(response.data);
       } catch (error) {
@@ -61,7 +61,7 @@ const EditSection = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`http://localhost:5000/admin/sections/${id}`, {
+      await axios.put(`${process.env.REACT_APP_API_URL}/admin/sections/${id}`, {
         section,
         sessionId,
         semesterId,

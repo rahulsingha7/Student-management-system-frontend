@@ -28,7 +28,7 @@ const ViewTeacherSchedules = () => {
     setLoading(true);
     try {
       const response = await axios.get(
-        `http://localhost:5000/admin/teacher-schedule?search=${search}&session=${selectedSession}`
+        `${process.env.REACT_APP_API_URL}/admin/teacher-schedule?search=${search}&session=${selectedSession}`
       );
       setTeacherSchedules(response.data);
       // displayMessage("Teacher schedules loaded successfully.");
@@ -43,7 +43,7 @@ const ViewTeacherSchedules = () => {
   const fetchSessions = async () => {
     setLoading(true);
     try {
-      const response = await axios.get("http://localhost:5000/admin/sessions");
+      const response = await axios.get(`${process.env.REACT_APP_API_URL}/admin/sessions`);
       setSessions(response.data);
       // displayMessage("Sessions loaded successfully.");
     } catch (error) {
@@ -66,7 +66,7 @@ const ViewTeacherSchedules = () => {
     if (window.confirm("Are you sure you want to delete this schedule?")) {
       try {
         await axios.delete(
-          `http://localhost:5000/admin/teacher-schedule/${id}`
+          `${process.env.REACT_APP_API_URL}/admin/teacher-schedule/${id}`
         );
         setTeacherSchedules(
           teacherSchedules.filter((schedule) => schedule._id !== id)

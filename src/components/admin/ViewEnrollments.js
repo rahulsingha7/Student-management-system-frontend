@@ -26,7 +26,7 @@ const ViewEnrollments = () => {
 
   const fetchSessions = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/admin/sessions");
+      const response = await axios.get(`${process.env.REACT_APP_API_URL}/admin/sessions`);
       setSessions(response.data);
     } catch (error) {
       displayError("Error fetching sessions.");
@@ -37,7 +37,7 @@ const ViewEnrollments = () => {
     setLoading(true);
     try {
       const response = await axios.get(
-        `http://localhost:5000/admin/enroll/enrollments?search=${search}&sessionId=${selectedSession}`
+        `${process.env.REACT_APP_API_URL}/admin/enroll/enrollments?search=${search}&sessionId=${selectedSession}`
       );
       setEnrollments(response.data);
     } catch (error) {
@@ -61,7 +61,7 @@ const ViewEnrollments = () => {
     if (!confirmation) return;
 
     try {
-      await axios.put(`http://localhost:5000/admin/enroll/enrollment/status`, {
+      await axios.put(`${process.env.REACT_APP_API_URL}/admin/enroll/enrollment/status`, {
         enrollmentId,
         subjectId,
         sectionId,
@@ -97,7 +97,7 @@ const ViewEnrollments = () => {
 
     try {
       await axios.delete(
-        `http://localhost:5000/admin/enroll/enrollment/delete`,
+        `${process.env.REACT_APP_API_URL}/admin/enroll/enrollment/delete`,
         {
           data: { enrollmentId, subjectId, sectionId },
         }
@@ -145,7 +145,7 @@ const ViewEnrollments = () => {
 
     try {
       await axios.put(
-        "http://localhost:5000/admin/enroll/enrollment/approve-all",
+        `${process.env.REACT_APP_API_URL}/admin/enroll/enrollment/approve-all`,
         {
           sessionId: selectedSession,
         }

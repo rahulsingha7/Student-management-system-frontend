@@ -13,7 +13,7 @@ const ViewSemesterWiseResult = () => {
     const fetchSemesterWiseResult = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/admin/results/semesterwise/${studentId}`
+          `${process.env.REACT_APP_API_URL}/admin/results/semesterwise/${studentId}`
         );
         const { student, overallGpa, semesters } = response.data;
 

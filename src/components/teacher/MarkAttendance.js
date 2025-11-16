@@ -26,7 +26,9 @@ const MarkAttendance = () => {
 
   const fetchSessions = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/admin/sessions");
+      const response = await axios.get(
+        `${process.env.REACT_APP_API_URL}/admin/sessions`
+      );
       setSessions(response.data);
     } catch (error) {
       displayError("Failed to fetch sessions.");
@@ -38,19 +40,19 @@ const MarkAttendance = () => {
       setGroupedData({});
       return;
     }
-  
+
     setLoading(true);
-  
+
     try {
       const response = await axios.get(
-        "http://localhost:5000/teacher/attendance/students",
+        `${process.env.REACT_APP_API_URL}/teacher/attendance/students`,
         { params: { teacherId, sessionId: selectedSession } } // Pass sessionId explicitly
       );
-  
+
       const students = response.data.filter(
         (student) => student.sessionId === selectedSession // Additional filtering in the frontend
       );
-  
+
       const grouped = students.reduce((acc, student) => {
         const groupKey = `${student.semester}-${student.section}-${student.session}-${student.courseCode}-${student.courseTitle}`;
         if (!acc[groupKey]) {
@@ -65,7 +67,7 @@ const MarkAttendance = () => {
         });
         return acc;
       }, {});
-  
+
       setAttendanceData(students);
       setGroupedData(grouped);
       setLoading(false);
@@ -74,7 +76,6 @@ const MarkAttendance = () => {
       setLoading(false);
     }
   };
-  
 
   useEffect(() => {
     fetchSessions();
@@ -128,7 +129,7 @@ const MarkAttendance = () => {
 
     try {
       await axios.post(
-        "http://localhost:5000/teacher/attendance/mark",
+        `${process.env.REACT_APP_API_URL}/teacher/attendance/mark`,
         payload
       );
       displayMessage(`Attendance for group "${groupKey}" marked successfully!`);

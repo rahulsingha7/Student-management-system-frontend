@@ -15,7 +15,9 @@ const CreateSemester = () => {
       return;
     }
     try {
-      await axios.post("http://localhost:5000/admin/semesters", { semester });
+      await axios.post(`${process.env.REACT_APP_API_URL}/admin/semesters`, {
+        semester,
+      });
       displayMessage("Semester created successfully!");
       navigate("/admin/view-semesters"); // Redirect to View Semesters
     } catch (error) {

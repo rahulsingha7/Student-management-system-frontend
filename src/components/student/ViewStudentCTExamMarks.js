@@ -15,12 +15,11 @@ const ViewStudentCTExamMarks = () => {
     setTimeout(() => setError(""), 5000);
   };
 
-
   useEffect(() => {
     const fetchSessions = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5000/admin/sessions"
+          `${process.env.REACT_APP_API_URL}/admin/sessions`
         );
         setSessions(response.data);
       } catch (err) {
@@ -41,7 +40,7 @@ const ViewStudentCTExamMarks = () => {
 
     try {
       const response = await axios.get(
-        `http://localhost:5000/student/exam/marks?studentId=${studentId}&sessionId=${sessionId}`
+        `${process.env.REACT_APP_API_URL}/student/exam/marks?studentId=${studentId}&sessionId=${sessionId}`
       );
       setMarksData(response.data.marks);
       // displayMessage("CT exam marks loaded successfully.");

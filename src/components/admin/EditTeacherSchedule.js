@@ -26,9 +26,9 @@ const EditTeacherSchedule = () => {
     const fetchData = async () => {
       try {
         const [teacherRes, semesterRes, sessionRes] = await Promise.all([
-          axios.get("http://localhost:5000/teacher/list"),
-          axios.get("http://localhost:5000/admin/semesters"),
-          axios.get("http://localhost:5000/admin/sessions"),
+          axios.get(`${process.env.REACT_APP_API_URL}/teacher/list`),
+          axios.get(`${process.env.REACT_APP_API_URL}/admin/semesters`),
+          axios.get(`${process.env.REACT_APP_API_URL}/admin/sessions`),
         ]);
         setTeachers(teacherRes.data);
         setSemesters(semesterRes.data);
@@ -36,7 +36,7 @@ const EditTeacherSchedule = () => {
 
         // Fetch the current schedule data to edit
         const scheduleRes = await axios.get(
-          `http://localhost:5000/admin/teacher-schedule/${id}`
+          `${process.env.REACT_APP_API_URL}/admin/teacher-schedule/${id}`
         );
         const schedule = scheduleRes.data;
         setTeacherId(schedule.teacherId._id);
@@ -59,7 +59,7 @@ const EditTeacherSchedule = () => {
       // Fetch subjects based on selected session
       axios
         .get(
-          `http://localhost:5000/admin/teacher-schedule/subjects/session/${session}`
+          `${process.env.REACT_APP_API_URL}/admin/teacher-schedule/subjects/session/${session}`
         )
         .then((response) => setSubjects(response.data))
         .catch((error) => displayError("Failed to fetch subjects"));
@@ -71,7 +71,7 @@ const EditTeacherSchedule = () => {
       // Fetch sections based on selected semester and session
       axios
         .get(
-          `http://localhost:5000/admin/teacher-schedule/sections/semester/${semester}/session/${session}`
+          `${process.env.REACT_APP_API_URL}/admin/teacher-schedule/sections/semester/${semester}/session/${session}`
         )
         .then((response) => setSections(response.data))
         .catch((error) => displayError("Failed to fetch sections"));
@@ -82,7 +82,7 @@ const EditTeacherSchedule = () => {
     e.preventDefault();
 
     try {
-      await axios.put(`http://localhost:5000/admin/teacher-schedule/${id}`, {
+      await axios.put(`${process.env.REACT_APP_API_URL}/admin/teacher-schedule/${id}`, {
         teacherId,
         subject,
         semester,

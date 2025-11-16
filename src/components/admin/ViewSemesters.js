@@ -12,7 +12,7 @@ const ViewSemesters = () => {
     const fetchSemesters = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5000/admin/semesters"
+          `${process.env.REACT_APP_API_URL}/admin/semesters`
         );
         setSemesters(response.data);
         setLoading(false);
@@ -32,7 +32,7 @@ const ViewSemesters = () => {
     if (!isConfirmed) return;
 
     try {
-      await axios.delete(`http://localhost:5000/admin/semesters/${id}`);
+      await axios.delete(`${process.env.REACT_APP_API_URL}/admin/semesters/${id}`);
       setSemesters(semesters.filter((semester) => semester._id !== id)); // Update local state after deletion
     } catch (error) {
       displayError(error);

@@ -1,0 +1,27 @@
+/* src/components/ViewStudentSchedule.css */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  /* Specific overlap class for rows */
+  /* ViewStudentSchedule.css */
+  /* Ensure the overlap class has higher specificity */
+  .table tr.overlap {
+    background-color: red !important;
+    color: white !important;
+  }
+  
+  
+  .table th,
+  .table td {
+    padding: 8px;
+    border: 1px solid #ddd;
+    text-align: center;
+  }
+  
+  .table td.pending {
+    color: orange;
+    font-weight: bold;
+  }
+  

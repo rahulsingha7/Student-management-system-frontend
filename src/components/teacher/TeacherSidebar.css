@@ -1,0 +1,47 @@
+/* Sidebar Styling */
+.sidebar {
+  width: 250px;
+  background-color: #343a40;
+  color: #fff;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Hover Effect for Section Headings */
+.sidebar-section {
+  cursor: pointer;
+  padding: 8px 0;
+  font-weight: bold;
+  border-bottom: 1px solid #495057;
+  transition: color 0.2s;
+}
+
+.sidebar-section:hover {
+  color: #adb5bd;
+}
+
+/* Submenu Styling */
+.sidebar-submenu {
+  padding-left: 15px;
+  padding-top: 5px;
+}
+
+.sidebar-link {
+  display: block;
+  padding: 5px 0;
+  color: #adb5bd;
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.2s;
+}
+
+.sidebar-link:hover {
+  color: #fff;
+}
+
+/* Button Styling */
+.btn-danger {
+  background-color: #dc3545;
+  border-color: #dc3545;
+}

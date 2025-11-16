@@ -1,0 +1,57 @@
+.container {
+  padding: 20px;
+}
+
+.card {
+  border: none;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.card-header {
+  font-weight: bold;
+  font-size: 1.2em;
+  color: white; /* Ensures text is readable */
+}
+
+.card-title {
+  font-size: 2em;
+  color: #007bff; /* Bootstrap primary color */
+}
+
+/* Unique colors for each card */
+.bg-students {
+  background-color: #4caf50; /* Green */
+}
+
+.bg-teachers {
+  background-color: #2196f3; /* Blue */
+}
+
+.bg-semesters {
+  background-color: #ff9800; /* Orange */
+}
+
+.bg-sections {
+  background-color: #9c27b0; /* Purple */
+}
+
+.bg-subjects {
+  background-color: #f44336; /* Red */
+}
+
+.bg-sessions {
+  background-color: #3f51b5; /* Indigo */
+}
+
+.mb-3 {
+  margin-bottom: 20px;
+}
+
+.row {
+  margin-top: 20px;
+}

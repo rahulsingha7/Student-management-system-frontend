@@ -34,7 +34,7 @@ It supports three user roles: **Admin**, **Teacher**, and **Student**, each with
 
 | Tool / Library      | Purpose                                 |
 |---------------------|-------------------------------------------|
-| **React (CRA)**     | UI framework                              |
+| **React**     | UI framework                              |
 | **React Router**    | Routing and role-based navigation         |
 | **Axios**           | API communication                         |
 | **Bootstrap 5**     | UI layout and styling                     |
